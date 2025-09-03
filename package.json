@@ -1,0 +1,36 @@
+{
+  "name": "okx-wallet-generator",
+  "version": "1.0.0",
+  "description": "使用 OKX Wallet SDK 生成助记词并导出多链地址的工具",
+  "main": "walletGenerator.js",
+  "scripts": {
+    "start": "node walletGenerator.js",
+    "generate": "node walletGenerator.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "okx",
+    "wallet",
+    "mnemonic",
+    "blockchain",
+    "ethereum",
+    "bitcoin",
+    "solana",
+    "tron",
+    "sui",
+    "crypto",
+    "web3"
+  ],
+  "author": "Developer",
+  "license": "MIT",
+  "dependencies": {
+    "@okxweb3/coin-aptos": "^2.0.2",
+    "@okxweb3/coin-base": "^1.1.6",
+    "@okxweb3/coin-bitcoin": "^1.2.1",
+    "@okxweb3/coin-ethereum": "^1.1.1",
+    "@okxweb3/coin-solana": "^1.1.0",
+    "@okxweb3/coin-sui": "^1.1.3",
+    "@okxweb3/coin-tron": "^1.1.0",
+    "@okxweb3/crypto-lib": "^1.0.13"
+  }
+}
