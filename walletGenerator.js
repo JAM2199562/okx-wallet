@@ -4,7 +4,6 @@ const { generateMnemonic, mnemonicToSeed } = require('@okxweb3/crypto-lib/dist/b
 const { EthWallet } = require('@okxweb3/coin-ethereum/dist/EthWallet');
 const { BtcWallet } = require('@okxweb3/coin-bitcoin/dist/wallet');
 const { SolWallet } = require('@okxweb3/coin-solana/dist/SolWallet');
-const { TrxWallet } = require('@okxweb3/coin-tron/dist');
 const { SuiWallet } = require('@okxweb3/coin-sui/dist/SuiWallet');
 const { AptosWallet } = require('@okxweb3/coin-aptos/dist/AptosWallet');
 const { fromSeed } = require('@okxweb3/crypto-lib/dist/bip32');
@@ -137,20 +136,7 @@ class WalletGenerator {
     }
   }
 
-  // 生成Tron地址
-  async generateTronAddress(privateKey) {
-    try {
-      const tronWallet = new TrxWallet();
-      const params = {
-        privateKey: privateKey
-      };
-      const result = await tronWallet.getNewAddress(params);
-      return result;
-    } catch (error) {
-      console.error("Tron地址生成失败:", error.message);
-      throw error;
-    }
-  }
+  
 
   // 生成Sui地址
   async generateSuiAddress(privateKey) {
@@ -222,13 +208,7 @@ class WalletGenerator {
         address: solAddress.address
       };
 
-      // Tron地址生成 (使用最常见的标准路径 m/44'/195'/0'/0/0)
-      const tronPrivateKey = await this.derivePrivateKeyFromMnemonic(mnemonic, "m/44'/195'/0'/0/0", 'hex');
-      const tronAddress = await this.generateTronAddress(tronPrivateKey);
-      wallets.chains.tron = {
-        privateKey: tronPrivateKey,
-        address: tronAddress.address
-      };
+      
 
       // Sui地址生成 (使用最常见的标准路径 m/44'/784'/0'/0'/0')
       const suiPrivateKey = await this.derivePrivateKeyFromMnemonic(mnemonic, "m/44'/784'/0'/0'/0'", 'sui');
@@ -279,7 +259,6 @@ class WalletGenerator {
       console.log(`  🔷 以太坊: ${wallets.chains.ethereum.address}`);
       console.log(`  🔘 比特币: ${wallets.chains.bitcoin.address}`);
       console.log(`  ⚡ Solana: ${wallets.chains.solana.address}`);
-      console.log(`  🔴 Tron: ${wallets.chains.tron.address}`);
       console.log(`  🔱 Sui: ${wallets.chains.sui.address}`);
       console.log(`  🟣 Aptos: ${wallets.chains.aptos.address}`);
       
